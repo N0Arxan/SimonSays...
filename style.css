@@ -30,7 +30,7 @@ body{
     box-shadow: 10px 10px 22px -7px rgba(0,0,0,0.75);
     margin: 10px 10px;
     transition:all 1s;
-    opacity: 60%;
+    opacity: 55%;
   }
 .dot:hover, .dot:active{
     box-shadow: none;
