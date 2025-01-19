@@ -5,18 +5,34 @@ const blue = document.getElementById('blue');
 const red = document.getElementById('red');
 const score = document.getElementById("score");
 const msg = document.getElementsByTagName("h2")[0];
+const click = new Audio("pop-39222.mp3");
+const win = new Audio("shine-11-268907.mp3");
+const loose = new Audio("fart-83471.mp3");
 const compareArrays = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
 };
 const sleep = (ms)=> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+if (navigator.userAgent.search('Mobile') > 0) {
+    window.FLAGS = {
+        start: 'touchstart',
+        end: 'touchend',
+        move: 'touchmove',
+        click: 'click',
+        touchScreen: true
+    };
+} else {
+    window.FLAGS = {
+        start: 'mousedown',
+        end: 'mouseup',
+        move: 'mousemove',
+        click: 'click',
+        touchScreen: false
+    };
+}
 
 let level = 2;
-let playerMove =[];
-
-
 
 function generateMachineMove(level){
     let machineMove = [];
@@ -30,78 +46,100 @@ function generateMachineMove(level){
 async function displayMachineMove(array = ["red", "blue", "green"]) {
     msg.innerHTML = "Look carefully ... ";
     for (const color of array) {
-        if (color === "red") {
-            red.classList.add("active-red");
-            setTimeout(() => {
-                red.classList.remove('active-red');
-            }, 1000);
-        }
-        if (color === "blue") {
-            blue.classList.add("active-blue");
-            setTimeout(() => {
-                blue.classList.remove('active-blue');
-            }, 1000);
-        }
-        if (color === "green") {
-            green.classList.add("active-green");
-            setTimeout(() => {
-                green.classList.remove('active-green');
-            }, 1000);
-        }
-        await sleep(1700)
+        const element = document.getElementById(color);
+        element.classList.add(`active-${color}`);
+        await sleep(1000);
+        element.classList.remove(`active-${color}`);
+        await sleep(1000);
     }
 }
-function addEL(machineMove,playerMove){
-    msg.innerHTML = " Your turn ";
-    red.addEventListener("click", red.handler = () => {
-        playerMove.push(red.getAttribute("value"));
-        if (playerMove.length === level){
-            check(machineMove,playerMove);
-        }
-    })
-    blue.addEventListener("click",blue.handler = () => {
-        playerMove.push(blue.getAttribute("value"));
-        if (playerMove.length === level){
-            check(machineMove,playerMove);
-        }
-    })
-    green.addEventListener("click",green.handler = () => {
-        playerMove.push(green.getAttribute("value"));
-        if (playerMove.length === level){
-            check(machineMove,playerMove);
-        }
-    })
-}
+
 function removeEL(){
     red.removeEventListener("click", red.handler );
     blue.removeEventListener("click", blue.handler );
     green.removeEventListener("click", green.handler );
 }
 
-function check(playerMove,machineMove){
-    removeEL();
+
+
+
+async function check(machineMove,playerMove){
     msg.innerHTML = "Simon Says";
     console.log(playerMove,machineMove)
     if(compareArrays(playerMove,machineMove)){
         console.log("you won");
+        await win.play();
         level++;
+        console.log(level);
         let int = parseInt(score.innerHTML);
         int += 1;
-        score.innerHTML = int;
-        playerMove =[];
-        main(level);
+        score.innerHTML = int.toString();
+        await playGame();
     }else{
-        console.log("you lose");
-        score.innerHTML = 0;
-        level = 2 ;
-        playerMove =[];
+        stopGame();
+        await loose.play();
     }
 }
 
-async function main(level){
-    
+async function playGame(){
+
+    let playerMove = [];
+
     let machineMove = generateMachineMove(level);
-    displayMachineMove(machineMove);
-    await new Promise(resolve => setTimeout(resolve, level*2700));
-    addEL(machineMove,playerMove);
+    await displayMachineMove(machineMove);
+
+
+    function addEL() {
+        msg.innerHTML = "Your turn ...";
+        removeEL();
+        red.addEventListener("click", red.handler = () => clickHandler(red));
+        blue.addEventListener("click", blue.handler = () => clickHandler(blue));
+        green.addEventListener("click", green.handler = () => clickHandler(green));
+
+        colors.forEach(color => {
+            const element = document.getElementById(color);
+
+            element.addEventListener(FLAGS.start, () => {
+                element.classList.add(`active-${color}`);
+            });
+
+            element.addEventListener(FLAGS.end, () => {
+                element.classList.remove(`active-${color}`);
+            });
+        });
+
+    }
+
+
+
+    addEL()
+
+    async function clickHandler(color) {
+        console.log("clicked");
+        await click.play();
+        playerMove.push(color.getAttribute("value"));
+        if (playerMove.length === level) {
+            removeEL();
+            await check(machineMove,playerMove);
+        }
+    }
+}
+
+
+function startGame(){
+    start.addEventListener("click", async () => {
+        start.style.display = "none";
+        await playGame();
+    });
+}
+startGame();
+
+function stopGame(){
+    removeEL();
+    console.log("you lose");
+    score.innerHTML = "0";
+    start.innerHTML = "Play Again";
+    level = 2;
+    msg.innerHTML = "Game Over Try Again";
+    start.style.display = "block";
 }
