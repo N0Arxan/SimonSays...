@@ -5,9 +5,9 @@ const blue = document.getElementById('blue');
 const red = document.getElementById('red');
 const score = document.getElementById("score");
 const msg = document.getElementsByTagName("h2")[0];
-const click = new Audio("pop-39222.mp3");
-const win = new Audio("shine-11-268907.mp3");
-const loose = new Audio("fart-83471.mp3");
+const click = new Audio("audio/pop-39222.mp3");
+const win = new Audio("audio/shine-11-268907.mp3");
+const loose = new Audio("audio/fart-83471.mp3");
 const compareArrays = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
 };

@@ -2,9 +2,10 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(91,90,90,1) 100%);
     height: 100vh;
     align-items: center;
     justify-content: center;
@@ -12,7 +13,6 @@ body{
 .container{
     width :390px;  
     height: 100vh;
- /*   background-color: rgb(202, 199, 11); */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,43 +33,31 @@ body{
     opacity: 55%;
     cursor: pointer;
   }
-/*.dot:hover, .dot:active{
-    box-shadow: none;
-    opacity: 1;
-    cursor: pointer;
-}*/
+
 .red{
     background-color: rgb(211, 59, 59);
 }
-/*.red:hover,.red:active{
-    box-shadow: 0px 0px 42px 0px rgba(211, 59, 59,0.9);
-}*/
+
 .blue{
-    background-color: #051937;
+    background-color: #074eca;
 }
-/*.blue:hover,.blue:active{
-    box-shadow: 0px 0px 42px 0px rgba(0,81,147,0.9);
-}*/
+
 .green{
     background-color: #A8EB12;
 }
-/*.green:hover,.green:active{
-    box-shadow: 0px 0px 42px 0px rgba(166,235,18,0.9);
-}*/
-
 
 
 .active-red{
     opacity: 1;
-    box-shadow: 0px 0px 42px 0px rgba(211, 59, 59,0.9);
+    box-shadow: 0px 0px 100px 15px rgba(211,59,59,0.95);
 }
 .active-green{
     opacity: 1;
-    box-shadow: 0px 0px 42px 0px rgba(166,235,18,0.9);
+    box-shadow: 0px 0px 100px 15px rgba(166,235,18,0.9);
 }
 .active-blue{
     opacity: 1;
-    box-shadow: 0px 0px 42px 0px rgba(0,81,147,0.9);
+    box-shadow: 0px 0px 100px 20px rgba(8,78,198,1);
 }
 
 .score{
