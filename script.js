@@ -24,8 +24,8 @@ if (navigator.userAgent.search('Mobile') > 0) {
     };
 } else {
     window.FLAGS = {
-        start: 'mousedown',
-        end: 'mouseup',
+        start: 'mouseenter',
+        end: 'mouseleave',
         move: 'mousemove',
         click: 'click',
         touchScreen: false
