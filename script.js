@@ -8,6 +8,7 @@ const msg = document.getElementsByTagName("h2")[0];
 const click = new Audio("audio/pop-39222.mp3");
 const win = new Audio("audio/shine-11-268907.mp3");
 const loose = new Audio("audio/fart-83471.mp3");
+
 const compareArrays = (a, b) => {
     return JSON.stringify(a) === JSON.stringify(b);
 };
@@ -48,9 +49,9 @@ async function displayMachineMove(array = ["red", "blue", "green"]) {
     for (const color of array) {
         const element = document.getElementById(color);
         element.classList.add(`active-${color}`);
-        await sleep(1000);
+        await sleep(700);
         element.classList.remove(`active-${color}`);
-        await sleep(1000);
+        await sleep(700);
     }
 }
 
