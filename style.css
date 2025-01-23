@@ -6,12 +6,14 @@ body{
     display: flex;
     background: rgb(0,0,0);
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(91,90,90,1) 100%);
+    height: 100dvh;
     height: 100vh;
     align-items: center;
     justify-content: center;
 }
 .container{
-    width :390px;  
+    width :390px;
+    height: 100dvh;  
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -32,7 +34,11 @@ body{
     transition:all 1s;
     opacity: 55%;
     cursor: pointer;
-  }
+}
+.dot:hover ,.dot:active{
+    opacity: 1;
+    box-shadow: none;
+}
 
 .red{
     background-color: rgb(211, 59, 59);
@@ -81,4 +87,55 @@ body{
     color: aliceblue;
     font-size: 72px;
     margin-top: 20px;
+}
+table , td , th{
+    border-bottom: 1px solid rgb(211, 85, 85);
+    border-collapse: collapse;
+    text-align: center;
+}
+table {
+    width: 80%;
+    margin-top: 0;
+}
+td ,th{
+    padding: 5px;
+    color: white;
+}
+td:first-child,th:first-child{
+    width: 50%;
+    border-right: 1px solid rgb(211, 85, 85);
+}
+.msg{
+    width: 250px;
+    position: absolute;
+    height: 125px;
+    opacity: 0;
+    background-color: #eeee;
+    border-radius: 15px;
+    transition: all 1s ease-in ;
+    top: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.msg h5{
+    color:black;
+    height: 20%;
+}
+form{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    flex-direction: column;
+    height: 80%;
+}
+form input{
+    width: 100%;
+}
+form button{
+    width: 100%;
+    color: #031022;
 }
